@@ -2,7 +2,6 @@ package io.github.real_septicake.hexxyplanes.forge;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
@@ -38,8 +37,8 @@ import java.util.concurrent.Executor;
 public class VoidChunkGenerator extends ChunkGenerator {
     private final Holder<Biome> biome;
 
-    public static final MapCodec<VoidChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Biome.CODEC.stable().fieldOf("biome").forGetter(VoidChunkGenerator::getBiome)
+    public static final Codec<VoidChunkGenerator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Biome.CODEC.stable().fieldOf("biome").forGetter((v) -> v.biome)
     ).apply(instance, instance.stable(VoidChunkGenerator::new)));
 
     public VoidChunkGenerator(MinecraftServer server) {
@@ -52,14 +51,9 @@ public class VoidChunkGenerator extends ChunkGenerator {
         this.biome = biome;
     }
 
-    protected Holder<Biome> getBiome() {
-        return this.biome;
-    }
-
     @Override
-    @SuppressWarnings("unchecked")
     protected @NotNull Codec<? extends ChunkGenerator> codec() {
-        return (Codec<? extends ChunkGenerator>) CODEC;
+        return CODEC;
     }
 
     @Override
@@ -121,7 +115,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public WeightedRandomList<MobSpawnSettings.SpawnerData> getMobsAt(@NotNull Holder<Biome> biome, @NotNull StructureManager structureManager, @NotNull MobCategory category, @NotNull BlockPos pos) {
+    public @NotNull WeightedRandomList<MobSpawnSettings.SpawnerData> getMobsAt(@NotNull Holder<Biome> biome, @NotNull StructureManager structureManager, @NotNull MobCategory category, @NotNull BlockPos pos) {
         return WeightedRandomList.create();
     }
 

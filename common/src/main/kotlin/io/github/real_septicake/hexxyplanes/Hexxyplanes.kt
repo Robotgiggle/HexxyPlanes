@@ -20,7 +20,7 @@ object Hexxyplanes {
     fun id(path: String) = ResourceLocation(MODID, path)
 
     @JvmStatic
-    val DEMIPLANE_RL = id("demiplane_type")
+    val DEMIPLANE_RL = id("demiplane")
 
     fun rlFromUuid(uuid: UUID) = id("demiplane/$uuid")
 
