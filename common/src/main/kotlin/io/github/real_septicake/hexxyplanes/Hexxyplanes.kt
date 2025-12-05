@@ -12,6 +12,7 @@ import java.util.UUID
 
 object Hexxyplanes {
     const val MODID = "hexxyplanes"
+    val planes = mutableSetOf<String>()
 
     @JvmField
     val LOGGER: Logger = LogManager.getLogger(MODID)

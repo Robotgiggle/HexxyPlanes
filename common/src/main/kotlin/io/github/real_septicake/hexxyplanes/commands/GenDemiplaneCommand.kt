@@ -13,7 +13,7 @@ object GenDemiplaneCommand {
             .then(Commands.argument("for", EntityArgument.player())
                 .executes {
                     val p = EntityArgument.getPlayer(it, "for")
-                    getOrMakeDim(it.source.level, Hexxyplanes.rlFromUuid(p.uuid))
+                    getOrMakeDim(it.source.server, Hexxyplanes.rlFromUuid(p.uuid))
                     return@executes 1
                 })
         )

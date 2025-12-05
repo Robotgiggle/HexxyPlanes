@@ -8,6 +8,7 @@ import io.github.real_septicake.hexxyplanes.registry.HexxyplanesRegistrar
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.dimension.LevelStem
 import net.minecraftforge.registries.RegisterEvent
@@ -23,12 +24,13 @@ fun <T : Any> initRegistry(registrar: HexxyplanesRegistrar<T>) {
     }
 }
 
-fun getOrMakeDim(world: ServerLevel, id: ResourceLocation) {
+fun getOrMakeDim(server: MinecraftServer, id: ResourceLocation) {
     planeCache.computeIfAbsent(id.path) {
-        val demiplane = world.server.registryAccess().lookupOrThrow(Registries.DIMENSION_TYPE)
+        Hexxyplanes.planes += id.path
+        val demiplane = server.registryAccess().lookupOrThrow(Registries.DIMENSION_TYPE)
             .getOrThrow(ResourceKey.create(Registries.DIMENSION_TYPE, Hexxyplanes.DEMIPLANE_RL))
-        InfiniverseAPI.get().getOrCreateLevel(world.server, ResourceKey.create(Registries.DIMENSION, id)) {
-            LevelStem(demiplane, VoidChunkGenerator(world.server))
+        InfiniverseAPI.get().getOrCreateLevel(server, ResourceKey.create(Registries.DIMENSION, id)) {
+            LevelStem(demiplane, VoidChunkGenerator(server))
         }
     }
 }
