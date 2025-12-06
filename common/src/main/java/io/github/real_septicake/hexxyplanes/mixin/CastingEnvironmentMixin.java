@@ -26,9 +26,9 @@ public abstract class CastingEnvironmentMixin {
         if(getWorld().dimension() == HexxyplanesDimension.INSTANCE.getWORLD_KEY()) {
             if(getCastingEntity() instanceof ServerPlayer p) {
                 ChunkPos chunkPos = Hexxyplanes.chunkFromUUID(getWorld(), p.getUUID()).getPos();
-                boolean inside = vec.x >= chunkPos.getMinBlockX() &&
+                boolean inside = vec.x >= chunkPos.getMinBlockX() + 1 &&
                         vec.x <= chunkPos.getMinBlockX() + 11 &&
-                        vec.z >= chunkPos.getMinBlockZ() &&
+                        vec.z >= chunkPos.getMinBlockZ() + 1 &&
                         vec.z <= chunkPos.getMinBlockZ() + 11 &&
                         vec.y >= 1 && vec.y <= 11;
                 cir.setReturnValue(inside);

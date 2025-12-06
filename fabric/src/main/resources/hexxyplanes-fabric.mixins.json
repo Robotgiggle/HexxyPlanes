@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "FabricServerConfigAccessMixin"
   ],
   "injectors": {
     "defaultRequire": 1

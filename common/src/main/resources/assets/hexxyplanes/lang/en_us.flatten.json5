@@ -6,6 +6,12 @@
         },
       },
     },
+    tooltip: {
+      demiplane: "Demiplane"
+    },
+    error: {
+      bad_respawn: "Your respawn point is within the demiplane. Sending to world spawn..."
+    }
   },
 
   hexcasting: {

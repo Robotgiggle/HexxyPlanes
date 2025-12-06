@@ -11,7 +11,7 @@ import io.github.real_septicake.hexxyplanes.getPlane
 import net.minecraft.server.level.ServerPlayer
 import java.util.*
 
-object EnterPlaneAction : SpellAction {
+object OpEnterPlane : SpellAction {
     override val argc = 1
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
@@ -30,7 +30,7 @@ object EnterPlaneAction : SpellAction {
     private data class Spell(val uuid: UUID) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             val player = env.castingEntity as ServerPlayer
-            HexxyplanesDimension.goToPlane(env.world, player, uuid)
+            HexxyplanesDimension.goToPlane(env.world.server.getLevel(HexxyplanesDimension.WORLD_KEY)!!, player, uuid)
         }
     }
 }

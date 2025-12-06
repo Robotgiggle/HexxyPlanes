@@ -1,5 +1,6 @@
 package io.github.real_septicake.hexxyplanes
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import net.minecraft.resources.ResourceLocation
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -7,6 +8,7 @@ import io.github.real_septicake.hexxyplanes.config.HexxyplanesServerConfig
 import io.github.real_septicake.hexxyplanes.networking.HexxyplanesNetworking
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesActions
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesBlocks
+import io.github.real_septicake.hexxyplanes.registry.HexxyplanesIotas
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesItems
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.chunk.LevelChunk
@@ -27,11 +29,15 @@ object Hexxyplanes {
     }
 
     fun init() {
+        CastingEnvironment.addCreateEventListener { t, _ ->
+            t.addExtension(DemiplaneComponent(t))
+        }
         HexxyplanesServerConfig.init()
         initRegistries(
             HexxyplanesActions,
             HexxyplanesBlocks,
-            HexxyplanesItems
+            HexxyplanesItems,
+            HexxyplanesIotas
         )
         HexxyplanesNetworking.init()
     }

@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "ForgeServerConfigAccessMixin"
   ],
   "injectors": {
     "defaultRequire": 1

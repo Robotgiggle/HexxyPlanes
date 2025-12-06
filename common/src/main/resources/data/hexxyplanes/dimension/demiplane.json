@@ -1,7 +1,16 @@
 {
   "generator": {
-    "type": "hexxyplanes:void",
-    "biome": "minecraft:the_void"
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "minecraft:the_void",
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        }
+      ],
+      "structure_overrides": []
+    }
   },
   "type": "hexxyplanes:demiplane"
 }

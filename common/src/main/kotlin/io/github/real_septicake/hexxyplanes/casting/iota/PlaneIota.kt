@@ -29,28 +29,26 @@ class PlaneIota(val player: Player) : Iota(TYPE, player) {
         return c
     }
 
-    override fun display(): Component {
-        return Component.literal("Demiplane(")
-            .append(player.name.string)
-            .append(")")
-            .withStyle(ChatFormatting.GREEN)
-    }
-
     companion object {
         val TYPE: IotaType<PlaneIota> = object : IotaType<PlaneIota>() {
             override fun deserialize(tag: Tag, world: ServerLevel): PlaneIota? {
                 val c = tag.asCompound
                 val uuid = c.getUUID("uuid")
+                println(uuid)
                 val player = world.getPlayerByUUID(uuid) ?: return null
                 return PlaneIota(player)
             }
 
             override fun display(tag: Tag): Component {
                 val c = tag.asCompound
-                return Component.literal("Demiplane(")
-                    .append(c.getString("name"))
-                    .append(")")
-                    .withStyle(ChatFormatting.GREEN)
+                val comp = Component.translatable("hexxyplanes.tooltip.demiplane")
+                    .append(" (")
+                    .withStyle(ChatFormatting.DARK_GREEN)
+                comp.append(c.getString("name"))
+                    .withStyle(ChatFormatting.AQUA)
+                comp.append(")")
+                    .withStyle(ChatFormatting.DARK_GREEN)
+                return comp
             }
 
             override fun color(): Int {

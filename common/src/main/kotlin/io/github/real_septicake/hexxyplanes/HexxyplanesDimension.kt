@@ -1,8 +1,10 @@
 package io.github.real_septicake.hexxyplanes
 
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesBlocks
+import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -45,6 +47,9 @@ object HexxyplanesDimension {
         if(dim == WORLD_KEY) {
             dim = Level.OVERWORLD
             dest = world.sharedSpawnPos
+            player.sendSystemMessage(
+                Component.translatable("hexxyplanes.error.bad_respawn")
+                .withStyle(ChatFormatting.BOLD))
         }
         player.teleportTo(world.server.getLevel(dim)!!,
             dest.x.toDouble(), dest.y.toDouble(), dest.z.toDouble(), 0f, 0f)
