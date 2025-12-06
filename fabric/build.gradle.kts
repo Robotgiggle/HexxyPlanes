@@ -48,10 +48,6 @@ hexxyplanesModDependencies {
     optional("modmenu")
 }
 
-repositories {
-    maven("https://maven.nucleoid.xyz/")
-}
-
 dependencies {
     modApi(libs.fabric.api)
     modImplementation(libs.fabric.loader)
@@ -81,8 +77,6 @@ dependencies {
         include(it)
         annotationProcessor(it)
     }
-
-    modImplementation(libs.fantasy)
 
     modApi(libs.clothConfig.fabric) {
         exclude(group = "net.fabricmc.fabric-api")

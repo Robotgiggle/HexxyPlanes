@@ -8,23 +8,12 @@ import io.github.real_septicake.hexxyplanes.networking.HexxyplanesNetworking
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesActions
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesBlocks
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesItems
-import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.chunk.LevelChunk
 import java.util.UUID
 
 object Hexxyplanes {
     const val MODID = "hexxyplanes"
-
-    val DIMENSION_KEY = ResourceKey.create(
-        Registries.LEVEL_STEM,
-        id("demiplane")
-    )
-    val WORLD_KEY = ResourceKey.create(
-        Registries.DIMENSION,
-        DIMENSION_KEY.location()
-    )
 
     @JvmField
     val LOGGER: Logger = LogManager.getLogger(MODID)
