@@ -15,6 +15,8 @@ object HexxyplanesCommands {
         ExitPlaneCommand.add(source)
         PlaneExitCommand.add(source)
         GetPlaneExitCommand.add(source)
+        SendToPlaneCommand.add(source)
+        BanishCommand.add(source)
 
         dispatcher.register(source)
     }

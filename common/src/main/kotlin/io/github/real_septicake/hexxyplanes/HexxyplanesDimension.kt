@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import java.util.*
@@ -44,10 +45,25 @@ object HexxyplanesDimension {
         world.destroyBlock(BlockPos(chunkPos.minBlockX + 1, 2, chunkPos.minBlockZ + 1), true)
     }
 
-    fun goToPlane(world: ServerLevel, player: ServerPlayer, uuid: UUID) {
+    fun sendToPlane(world: ServerLevel, entity: Entity, uuid: UUID) {
         repairPlane(world, uuid)
         val chunkPos = Hexxyplanes.chunkFromUUID(uuid)
-        player.teleportTo(world, (chunkPos.minBlockX + 1.5), 1.0, (chunkPos.minBlockZ + 1.5), -45f, 0f)
+        entity.teleportTo(world, (chunkPos.minBlockX + 1.5), 1.0, (chunkPos.minBlockZ + 1.5), setOf(), -45f, 0f)
+    }
+
+    fun banishFromPlane(world: ServerLevel, by: ServerPlayer, entity: Entity) {
+        if(entity is ServerPlayer)
+            exitPlane(world, entity)
+        else {
+            val exit = getExit(by) ?: DemiplaneExit(
+                by.respawnDimension, by.respawnPosition ?: world.sharedSpawnPos
+            )
+            entity.teleportTo(
+                world.server.getLevel(exit.dimension)!!,
+                exit.position.x.toDouble(), exit.position.y.toDouble(), exit.position.z.toDouble(),
+                setOf(), 0f, 0f
+            )
+        }
     }
 
     fun exitPlane(world: ServerLevel, player: ServerPlayer) {

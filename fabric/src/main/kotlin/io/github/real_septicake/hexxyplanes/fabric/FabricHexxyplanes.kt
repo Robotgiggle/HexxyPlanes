@@ -14,7 +14,7 @@ object FabricHexxyplanes : ModInitializer {
         CommandRegistrationCallback.EVENT.register { dp, _, _ -> HexxyplanesCommands.register(dp) }
         ServerPlayConnectionEvents.JOIN.register { handler, _, server ->
             if(HexxyplanesDimension.WORLD_KEY == handler.player.level().dimension()) {
-                HexxyplanesDimension.goToPlane(server.getLevel(HexxyplanesDimension.WORLD_KEY)!!, handler.player, handler.player.uuid)
+                HexxyplanesDimension.sendToPlane(server.getLevel(HexxyplanesDimension.WORLD_KEY)!!, handler.player, handler.player.uuid)
             }
         }
     }

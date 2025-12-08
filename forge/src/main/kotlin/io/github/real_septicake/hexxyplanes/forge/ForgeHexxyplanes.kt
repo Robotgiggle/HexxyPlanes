@@ -43,7 +43,7 @@ class ForgeHexxyplanes {
             addListener { evt: RegisterCommandsEvent -> HexxyplanesCommands.register(evt.dispatcher) }
             addListener { evt: PlayerLoggedInEvent ->
                 if(HexxyplanesDimension.WORLD_KEY == evt.entity.level().dimension()) {
-                    HexxyplanesDimension.goToPlane(evt.entity.server!!.getLevel(HexxyplanesDimension.WORLD_KEY)!!, evt.entity!! as ServerPlayer, evt.entity.uuid)
+                    HexxyplanesDimension.sendToPlane(evt.entity.server!!.getLevel(HexxyplanesDimension.WORLD_KEY)!!, evt.entity!! as ServerPlayer, evt.entity.uuid)
                 }
             }
             addGenericListener(Entity::class.java) { evt: AttachCapabilitiesEvent<Entity> ->

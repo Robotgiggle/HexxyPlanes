@@ -3,34 +3,37 @@ package io.github.real_septicake.hexxyplanes.casting.actions.spells
 import at.petrak.hexcasting.api.casting.RenderedSpell
 import at.petrak.hexcasting.api.casting.castables.SpellAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadCaster
 import at.petrak.hexcasting.api.misc.MediaConstants
 import io.github.real_septicake.hexxyplanes.HexxyplanesDimension
-import io.github.real_septicake.hexxyplanes.getPlane
+import io.github.real_septicake.hexxyplanes.casting.mishaps.MishapNotInDemiplane
 import net.minecraft.server.level.ServerPlayer
-import java.util.*
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.player.Player
 
-object OpEnterPlane : SpellAction {
+object OpPlaneBanish : SpellAction {
     override val argc = 1
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
-        val dest = args.getPlane(0, 1)
-        val target = env.castingEntity
-        if(target !is ServerPlayer)
+        if(env.castingEntity !is ServerPlayer)
             throw MishapBadCaster()
+        if(HexxyplanesDimension.WORLD_KEY != env.world.dimension())
+            throw MishapNotInDemiplane()
+        val entity = args.getEntity(0, argc)
+        env.assertEntityInRange(entity)
 
         return SpellAction.Result(
-            Spell(dest.player.uuid),
-            if(HexxyplanesDimension.WORLD_KEY == target.level().dimension()) MediaConstants.DUST_UNIT * 5 else MediaConstants.CRYSTAL_UNIT * 10,
+            Spell(entity, env.castingEntity as ServerPlayer),
+            if(entity is Player) MediaConstants.CRYSTAL_UNIT * 5 else MediaConstants.SHARD_UNIT * 5,
             listOf()
         )
     }
 
-    private data class Spell(val uuid: UUID) : RenderedSpell {
+    private data class Spell(val target: Entity, val by: ServerPlayer) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val player = env.castingEntity as ServerPlayer
-            HexxyplanesDimension.sendToPlane(env.world.server.getLevel(HexxyplanesDimension.WORLD_KEY)!!, player, uuid)
+            HexxyplanesDimension.banishFromPlane(env.world, by, target)
         }
     }
 }
