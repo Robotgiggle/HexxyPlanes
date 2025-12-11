@@ -18,6 +18,8 @@ object HexxyplanesCommands {
         SendToPlaneCommand.add(source)
         BanishCommand.add(source)
 
+        source.requires{ it.hasPermission(Commands.LEVEL_ADMINS) }
+
         dispatcher.register(source)
     }
 }
