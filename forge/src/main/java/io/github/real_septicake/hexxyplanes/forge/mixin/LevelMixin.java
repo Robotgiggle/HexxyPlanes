@@ -19,8 +19,7 @@ public class LevelMixin {
 
     @Inject(method = "getWorldBorder", at = @At(value = "HEAD"), cancellable = true)
     private void hexplaneWorldBorder(CallbackInfoReturnable<WorldBorder> cir) {
-        if(HexxyplanesDimension.INSTANCE.getWORLD_KEY().location().equals(dimension.location())
-            && HexxyplanesDimension.INSTANCE.getWORLD_KEY().registry().equals(dimension.registry())) {
+        if(HexxyplanesDimension.INSTANCE.getWORLD_KEY() == dimension) {
             cir.setReturnValue(new WorldBorder());
         }
     }

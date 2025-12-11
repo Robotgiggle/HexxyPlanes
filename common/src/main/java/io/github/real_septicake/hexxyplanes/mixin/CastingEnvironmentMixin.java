@@ -34,8 +34,6 @@ public abstract class CastingEnvironmentMixin {
                         vec.z <= chunkPos.getMinBlockZ() + PLANE_SIZE &&
                         vec.y >= 1 && vec.y <= PLANE_SIZE;
                 cir.setReturnValue(inside);
-            } else {
-                cir.setReturnValue(false);
             }
         }
     }
