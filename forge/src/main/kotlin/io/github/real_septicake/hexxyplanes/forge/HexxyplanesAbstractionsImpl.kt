@@ -5,7 +5,6 @@ package io.github.real_septicake.hexxyplanes.forge
 import io.github.real_septicake.hexxyplanes.HexplaneExit
 import io.github.real_septicake.hexxyplanes.HexxyplanesDimension
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesRegistrar
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.player.Player
 import net.minecraftforge.registries.RegisterEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
