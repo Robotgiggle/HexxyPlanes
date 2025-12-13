@@ -44,8 +44,10 @@ class PlaneIota(val player: Player) : Iota(TYPE, player) {
                 val comp = Component.translatable("hexxyplanes.tooltip.hexplane")
                     .append(" (")
                     .withStyle(ChatFormatting.DARK_GREEN)
-                comp.append(c.getString("name"))
+                comp.append(
+                    Component.literal(c.getString("name"))
                     .withStyle(ChatFormatting.AQUA)
+                )
                 comp.append(")")
                     .withStyle(ChatFormatting.DARK_GREEN)
                 return comp
