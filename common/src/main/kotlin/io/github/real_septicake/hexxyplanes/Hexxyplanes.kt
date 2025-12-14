@@ -1,6 +1,8 @@
 package io.github.real_septicake.hexxyplanes
 
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.interop.HexInterop
+import dev.architectury.platform.Platform
 import net.minecraft.resources.ResourceLocation
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -11,6 +13,7 @@ import io.github.real_septicake.hexxyplanes.registry.HexxyplanesBlocks
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesIotas
 import io.github.real_septicake.hexxyplanes.registry.HexxyplanesItems
 import net.minecraft.world.level.ChunkPos
+import vazkii.patchouli.api.PatchouliAPI
 import java.util.UUID
 
 object Hexxyplanes {
@@ -28,6 +31,10 @@ object Hexxyplanes {
     }
 
     fun init() {
+        if(Platform.isModLoaded("oneironaut")) {
+            PatchouliAPI.get().setConfigFlag(HexInterop.PATCHOULI_ANY_INTEROP_FLAG, true)
+        }
+
         CastingEnvironment.addCreateEventListener { t, _ ->
             t.addExtension(HexplaneComponent(t))
         }
