@@ -18,7 +18,7 @@ architectury = "9.2.14"
 architectury-plugin = { require="[3.4, 3.5[" }
 architectury-loom = { require="[1.7, 1.8[" }
 
-fabric-loader = "0.14.25"
+fabric-loader = "0.16.7"
 fabric-api = "0.87.0+1.20.1"
 
 forge = "1.20.1-47.2.0"
@@ -55,6 +55,8 @@ shadow = "7.1.2"
 modPublish = "1.0.0"
 
 hexal = "0.3.1"
+hexpose = "1.0.0"
+playeranim = "1.0.2-rc1+1.20"
 
 [bundles]
 asm = ["asm", "asm-analysis", "asm-commons", "asm-tree", "asm-util"]
@@ -82,6 +84,9 @@ hexcasting-fabric = { module="at.petra-k.hexcasting:hexcasting-fabric-1.20.1", v
 hexcasting-forge  = { module="at.petra-k.hexcasting:hexcasting-forge-1.20.1", version.ref="hexcasting" }
 
 hexal-fabric = { module="ram.talia.hexal:hexal-fabric-1.20.1", version.ref="hexal" }
+
+hexpose-fabric = { module="miyucomics.hexpose:hexpose", version.ref="hexpose" }
+playeranim-fabric = { module="dev.kosmx.player-anim:player-animation-lib-fabric", version.ref="playeranim" }
 
 paucal-common = { module="at.petra-k.paucal:paucal-common-1.20.1", version.ref="paucal" }
 paucal-fabric = { module="at.petra-k.paucal:paucal-fabric-1.20.1", version.ref="paucal" }

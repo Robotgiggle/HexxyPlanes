@@ -55,6 +55,9 @@
   "suggests": {
     "modmenu": ">=${versions.modMenu}"
   },
+  "breaks": {
+    "hexical": "<2.0.0"
+  },
   "custom": {
     "cardinal-components": [
       "hexxyplanes:exit"

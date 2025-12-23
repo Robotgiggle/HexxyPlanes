@@ -36,6 +36,9 @@ repositories {
     maven {
         url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     }
+    maven {
+        url = uri("https://maven.kosmx.dev/")
+    }
 }
 
 hexxyplanesModDependencies {
@@ -92,13 +95,20 @@ dependencies {
         annotationProcessor(it)
     }
 
-    modCompileOnly(files("../libs/oneironaut-fabric-1.20.1-0.5.0-ad811dc.jar"))
+    modCompileOnly(files("../libs/oneironaut-fabric-1.20.1-0.5.0-ad811dc.jar", "../libs/hexical-2.0.0-e0d7ef9.jar"))
 
-    modLocalRuntime(files("../libs/oneironaut-fabric-1.20.1-0.5.0-ad811dc.jar"))
+    modLocalRuntime(files("../libs/oneironaut-fabric-1.20.1-0.5.0-ad811dc.jar"/*, "../libs/hexical-2.0.0-e0d7ef9.jar"*/))
+//    modLocalRuntime(libs.playeranim.fabric)
+//    modLocalRuntime(libs.hexpose.fabric)
     modLocalRuntime(libs.hexal.fabric)
 
     modApi(libs.clothConfig.fabric) {
         exclude(group = "net.fabricmc.fabric-api")
     }
     modImplementation(libs.modMenu)
+
+    libs.mixinExtras.common.also {
+        implementation(it)
+        annotationProcessor(it)
+    }
 }
